@@ -1,4 +1,4 @@
-(defproject randomstock "0.1.1"
+(defproject randomstock "0.1.2"
   :description "A webapp for selecting stocks at random."
   :url "http://example.com/FIXME"
   :license "MIT License. (mit-license.org)"
