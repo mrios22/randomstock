@@ -2,6 +2,8 @@
   export let name;
   export let viewsite;
   viewsite = false;
+  let stockCount = 1;
+  let singularPlural = "choice is";
 
   function toggle() {
     viewsite = !viewsite;
@@ -10,14 +12,23 @@
   let promise = getRandomTicker();
 
   async function getRandomTicker() {
-    const res = await fetch(`/random-stock`);
+    const res = await fetch(`/random-stock/${stockCount}`, {method: 'GET'});
     const text = await res.text();
 
+
+    if (stockCount == 1){
+      singularPlural = "choice is";
+    } else {
+      singularPlural = "choices are";
+    }
+
+    
     if (res.ok) {
       return text;
     } else {
       throw new Error(text);
     }
+    
   }
 
   function handleClick() {
@@ -43,16 +54,18 @@
 
           <p>If you select enough stocks at random, then your overall performance will tend to match the performance of the market. This website will help you pick those random stocks.</p>
 
-          <p>Selecting a random portfolio is sort of like creating your own index fund. Suppose you invest in five randomly-chosen stocks each month. After ten years, you will probably have about 500 different stocks in your portfolio. </p>
+          <p>Enter the number of unique stocks you wish to pick. (Maximum is 100.) </p>
 
+<input style="align: center" placeholder="1" bind:value={stockCount}>
+          
 <button on:click={handleClick}>
-	Pick a random stock.
+	Pick your stocks.
 </button>
 
 {#await promise}
 	<p>...waiting</p>
 {:then ticker}
-	<p>Your choice is <b>{ticker}</b></p>
+	<p>Your {singularPlural}  <b>{ticker}</b>.</p>
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}
