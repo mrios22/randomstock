@@ -2,14 +2,21 @@
 
 This Clojure/Svelte web app randomly selects a basket of US equities.
 
+## Usage
+
+Before running the app for the first time, you will need to compile the Svelte code. Go to the ``resources`` directory and run 
+
+``` shell
+$ npm run dev
+```
+
+After everything runs nicely, press ``Ctrl-C`` to quit the npm server. The frontend of the website has now been compiled.
+
 To run the app, go to the command line and run
 
 ``` shell
 $ lein ring server
 ```
-
-The Clojure backend just serves up stock names and serves the static files for the website. The backend is probably overkill for what it does. 
-
 
 ## License
 
